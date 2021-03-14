@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Mission to Mars</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        
+        <style>
+            h1{
+                background-color: lightgray;
+            }
+            
+            
+        </style>
+
+        <body>
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                    <h1 class="display-1">Mission to Mars</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-primary" href="../scrape">Scrape New Data</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                    <h2>Latest Mars News</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <h3>{{mars_dict.news_title}}</h3>
+                </div>
+                <div class="row">
+                    <p>{{mars_dict.news_p}}</p>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-8">
+                        <h2>Featured Mars Image</h2>
+                        <img scr="{{mars_dict.featured_image_url}}" alt="Current Featured Mars Image">
+                        
+                    </div>
+                    <div class="col-4"
+                    <h3>Mars Facts</h3>
+                </div>
+            </div>
+
+
+        </body>
+    
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
