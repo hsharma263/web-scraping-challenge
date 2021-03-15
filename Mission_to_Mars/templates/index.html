@@ -28,7 +28,7 @@
                 </div>
                 <div class="row">
                     <div class="col text-center">
-                        <button type="button" class="btn btn-primary" href="../scrape">Scrape New Data</button>
+                        <button type="button" class="btn btn-primary" href="http://127.0.0.1:5000/scrape">Scrape New Data</button>
                     </div>
                 </div>
                 <div class="row">
@@ -37,50 +37,77 @@
                     </div>
                 </div>
                 <div class="row">
-                    <h3>{{mars_dict.news_title}}</h3>
+                    <h3>{{ mars_data.news_title }}</h3>
                 </div>
                 <div class="row">
-                    <p>{{mars_dict.news_p}}</p>
+                    <p>{{ mars_data.news_p }}</p>
                 </div>
                 <br>
 
                 <div class="row">
                     <div class="col-8">
                         <h2>Featured Mars Image</h2>
-                        <img scr="{{mars_dict.featured_image_url}}" alt="Current Featured Mars Image">
-                        
+                        <img scr="{{ mars_data.featured_image_url }}" alt="Current Featured Mars Image">
+
                     </div>
-                    <div class="col-4"
+                    <div class="col-4">
                     <h3>Mars Facts</h3>
+                        {{ mars_data.html_table_mars }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <h2>Mars Hemispheres</h2>
+                    </div>
+
+                    <div>
+                            {% for image in mars_data.hemisphere_image_urls %} 
+                            <div class="col-6 border">
+                            </br>
+                                    <div>
+                                    <img width="200 px" height="200 px" src="{{ image.image_url }}">
+                                    </div>
+                
+                                    <div>
+                                    <h4> {{ image.title }} </h4>  
+                                    </div>
+                            
+                            </div>
+                            {% endfor %}
+                    </div>   
+                </div> 
+
                 </div>
             </div>
+
 
 
         </body>
     
     </head>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
