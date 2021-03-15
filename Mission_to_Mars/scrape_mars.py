@@ -82,3 +82,8 @@ def scrape():
 
     browser.quit()
     return mars_dict
+    
+if __name__ == "__main__":
+    scrape()
+
+print("Run successful")
