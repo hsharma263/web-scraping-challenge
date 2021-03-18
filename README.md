@@ -1,1 +1,2 @@
 # web-scraping-challenge
+The code in this repository is meant to be a challenge in using Pandas, MongoDB, in addition to HTML and bootstrap. Data is scraped from a variety of webpages and then presented on a webpage. 
