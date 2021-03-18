@@ -15,16 +15,15 @@ def scrape():
     browser = init_browser()
     mars_dict = {}
 
-
     # NASA MARS NEWS
     url = "https://mars.nasa.gov/news/"
+
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
-
-    news_title = soup.find_all("div", class_="content_title")[0].text.strip()
-    news_p = soup.find_all("div", class_="rollover_description_inner")[0].text.strip()
-
+    broad_titles = soup.select_one("div.list_text")
+    news_title = broad_titles.find("div", class_="content_title").text.strip()
+    news_p = broad_titles.find("div", class_="article_teaser_body").text.strip()
 
     # JPL MARS SPACE IMAGES
     jpl_url = "https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html"
@@ -35,7 +34,6 @@ def scrape():
     soup2 = BeautifulSoup(html, "html.parser")  
     featured_image = soup2.find_all("img")[1]["src"]
     featured_image_url = jpl_site_url + featured_image
-
 
     # MARS FACTS
     facts_url = "https://space-facts.com/mars/"
@@ -48,29 +46,22 @@ def scrape():
     # MARS HEMISPHERES
     main_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     browser.visit(main_url)
-    main_site_html = browser.html
-    main_site_soup = BeautifulSoup(main_site_html, "html.parser")
-    hemi_views = main_site_soup.find("div", class_="collapsible results").find_all("div", class_="item")
+    hemi_views = browser.find_by_css('div.description a.itemLink.product-item')
 
     hemisphere_image_urls = []
-    hemi_image_dict = {}
-    usgs_url = "https://astrogeology.usgs.gov/"
 
-    for i in hemi_views:
-        try:
-            title = i.h3.text
-            url_snip = i.a["href"]
-            
-            image_url = usgs_url + url_snip
-            
-            hemi_image_dict["title"] = title
-            hemi_image_dict["img_url"] = image_url
-            
-            hemisphere_image_urls.append(hemi_image_dict)
+    for i in range(len(hemi_views)):
+        hemi_image_dict = {}
 
-        except Exception as e:
-            print(e)
+        browser.find_by_css('div.description a.itemLink.product-item')[i].click()
+        
+        hemi_image_dict["title"] = browser.find_by_css('h2.title').text
+        sample = browser.find_by_text("Sample")
+        sample.click()
+        hemi_image_dict["img_url"] = sample["href"]
 
+        hemisphere_image_urls.append(hemi_image_dict)
+        browser.back()
 
     mars_dict={
         "news_title:": news_title,
@@ -79,10 +70,10 @@ def scrape():
         "Mars_facts_table": html_table_mars,
         "hemisphere_images": hemisphere_image_urls 
     }
-
+    print(mars_dict)
     browser.quit()
     return mars_dict
-    
+
 if __name__ == "__main__":
     scrape()
 
