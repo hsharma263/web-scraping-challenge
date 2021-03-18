@@ -10,16 +10,15 @@
         <title>Mission to Mars</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         
-        
         <style>
             h1{
                 background-color: lightgray;
             }
             
-            
         </style>
 
         <body>
+
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
@@ -28,31 +27,32 @@
                 </div>
                 <div class="row">
                     <div class="col text-center">
-                        <button type="button" class="btn btn-primary" href="http://127.0.0.1:5000/scrape">Scrape New Data</button>
+                        <a href="http://127.0.0.1:5000/scrape"><button type="button" class="btn btn-primary" >Scrape New Data</button></a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col col-md-12">
                     <h2>Latest Mars News</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <h3>{{ mars_data.news_title }}</h3>
+                <div class="row"> 
+                     <div class="col col-md-12">
+                        <h4>{{ data.news_title }}</h4>
+                        <p>{{ data.news_p }}</p>
+                   </div> 
                 </div>
-                <div class="row">
-                    <p>{{ mars_data.news_p }}</p>
-                </div>
-                <br>
+               
+                <br> 
 
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-md-8">
                         <h2>Featured Mars Image</h2>
-                        <img scr="{{ mars_data.featured_image_url }}" alt="Current Featured Mars Image">
+                        <img scr="{{ data.featured_image_url }}" alt="Current Featured Mars Image">
 
                     </div>
-                    <div class="col-4">
-                    <h3>Mars Facts</h3>
-                        {{ mars_data.html_table_mars }}
+                    <div class="col-md-4">
+                        <h3>Mars Facts</h3>
+                        {{ data.html_table_mars | safe}}
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     </div>
 
                     <div>
-                            {% for image in mars_data.hemisphere_image_urls %} 
+                            {% for image in data.hemisphere_image_urls %} 
                             <div class="col-6 border">
                             </br>
                                     <div>
@@ -77,12 +77,7 @@
                             {% endfor %}
                     </div>   
                 </div> 
-
-                </div>
             </div>
-
-
-
         </body>
     
     </head>
